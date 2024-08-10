@@ -59,6 +59,10 @@ function fetch() {
 			}
 		});
 	} else {
+		console.log(uri);
+		console.log(uri.startsWith('acct:'));
+		console.log(uri.startsWith('@'));
+
 		if (uri.startsWith('acct:')) {
 			uri = uri.slice(5);
 		}
