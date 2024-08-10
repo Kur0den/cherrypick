@@ -54,4 +54,6 @@ export async function lookup(router?: Router) {
 			_router.push(user.host ? `/@${user.username}@${user.host}` : `/@${user.username}`);
 		});
 	}
+
+	os.alert({ type: 'error', title: i18n.ts._lookupUi.lookupFailed, text: i18n.ts._lookupUi.lookupFailedDescription });
 }
