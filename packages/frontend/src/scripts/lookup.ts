@@ -52,8 +52,10 @@ export async function lookup(router?: Router) {
 		os.promiseDialog(promise, null, null, i18n.ts._lookupUi.fetchingAsApUser);
 		promise.then(user => {
 			_router.push(user.host ? `/@${user.username}@${user.host}` : `/@${user.username}`);
+			return;
 		});
 	}
 
 	os.alert({ type: 'error', title: i18n.ts._lookupUi.lookupFailed, text: i18n.ts._lookupUi.lookupFailedDescription });
+	return;
 }
