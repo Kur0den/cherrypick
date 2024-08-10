@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import * as Misskey from 'cherrypick-js';
 import * as os from '@/os.js';
 import { misskeyApi } from '@/scripts/misskey-api.js';
 import { i18n } from '@/i18n.js';
@@ -44,5 +45,13 @@ export async function lookup(router?: Router) {
 		}
 
 		return;
+	}
+
+	if (!query.includes(' ')) {
+		const promise = misskeyApi('users/show', Misskey.acct.parse('@' + query));
+		os.promiseDialog(promise, null, null, i18n.ts._lookupUi.lookingUpAsApUser);
+		promise.then(user => {
+			_router.push(user.host ? `/@${user.username}@${user.host}` : `/@${user.username}`);
+		});
 	}
 }
