@@ -3070,6 +3070,6 @@ _imageCompressionMode:
   noResizeCompressLossy: "縮小せず非可逆圧縮する"
 
 _lookupUi:
-  lookingupAsApUser: "ユーザーを照会中"
+  fetchingAsApUser: "ユーザーを照会中"
   lookupFailed: "照会に失敗しました"
   lookupFailedDescription: "照会先を正しく入力しているか確認してください"

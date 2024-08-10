@@ -11520,7 +11520,7 @@ export interface Locale extends ILocale {
         /**
          * ユーザーを照会中
          */
-        "lookingupAsApUser": string;
+        "fetchingAsApUser": string;
         /**
          * 照会に失敗しました
          */
