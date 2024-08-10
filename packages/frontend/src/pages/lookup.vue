@@ -66,9 +66,6 @@ function fetch() {
 		if (uri.startsWith('acct:')) {
 			uri = uri.slice(5);
 		}
-		if (!uri.startsWith('@')) {
-			uri = '@' + uri;
-		}
 		promise = misskeyApi('users/show', Misskey.acct.parse(uri));
 		promise.then(user => {
 			mainRouter.replace(user.host ? `/@${user.username}@${user.host}` : `/@${user.username}`);
