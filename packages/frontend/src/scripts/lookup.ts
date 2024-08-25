@@ -52,6 +52,8 @@ export async function lookup(router?: Router) {
 	if (!query.includes(' ')) {
 		const promise = misskeyApi('users/show', Misskey.acct.parse('@' + query));
 		os.promiseDialog(promise, null, null, i18n.ts._lookupUi.fetchingAsApUser);
+		await promise;
+
 		promise.then(user => {
 			_router.push(user.host ? `/@${user.username}@${user.host}` : `/@${user.username}`);
 			return;
