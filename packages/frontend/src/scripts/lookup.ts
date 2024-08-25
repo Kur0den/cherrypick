@@ -19,11 +19,6 @@ export async function lookup(router?: Router) {
 	const query = temp ? temp.trim() : '';
 	if (canceled || query.length <= 1) return;
 
-	if (query.startsWith('@') && !query.includes(' ')) {
-		_router.push(`/${query}`);
-		return;
-	}
-
 	if (query.startsWith('#')) {
 		_router.push(`/tags/${encodeURIComponent(query.substring(1))}`);
 		return;
@@ -50,7 +45,7 @@ export async function lookup(router?: Router) {
 	}
 
 	if (!query.includes(' ')) {
-		const promise = misskeyApi('users/show', Misskey.acct.parse('@' + query));
+		const promise = misskeyApi('users/show', Misskey.acct.parse(query));
 		os.promiseDialog(promise, null, (err: Misskey.api.APIError) => {
 			os.alert({ type: 'error', title: i18n.ts._lookupUi.lookupFailed, text: i18n.ts._lookupUi.lookupFailedDescription + '\n' + err.message + '\n' + err.id });
 		}, i18n.ts._lookupUi.fetchingAsApUser);
