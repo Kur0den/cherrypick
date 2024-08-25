@@ -34,7 +34,9 @@ export async function lookup(router?: Router) {
 			uri: query,
 		});
 
-		os.promiseDialog(promise, null, (err: Misskey.api.APIError) => {os.alert({ type: 'error', title: i18n.ts._lookupUi.lookupFailed, text: `${i18n.ts._lookupUi.lookupFailedDescription}\n${err.id}` });}, i18n.ts.fetchingAsApObject);
+		os.promiseDialog(promise, null, (err: Misskey.api.APIError) => {
+			os.alert({ type: 'error', title: i18n.ts._lookupUi.lookupFailed, text: i18n.ts._lookupUi.lookupFailedDescription + '\n' + err.message + err.id });
+		}, i18n.ts.fetchingAsApObject);
 
 		const res = await promise;
 
@@ -49,7 +51,9 @@ export async function lookup(router?: Router) {
 
 	if (!query.includes(' ')) {
 		const promise = misskeyApi('users/show', Misskey.acct.parse('@' + query));
-		os.promiseDialog(promise, null, null, i18n.ts._lookupUi.fetchingAsApUser);
+		os.promiseDialog(promise, null, (err: Misskey.api.APIError) => {
+			os.alert({ type: 'error', title: i18n.ts._lookupUi.lookupFailed, text: i18n.ts._lookupUi.lookupFailedDescription + '\n' + err.message + '\n' + err.id });
+		}, i18n.ts._lookupUi.fetchingAsApUser);
 		await promise;
 
 		promise.then(user => {
@@ -58,6 +62,5 @@ export async function lookup(router?: Router) {
 		});
 	}
 
-	os.alert({ type: 'error', title: i18n.ts._lookupUi.lookupFailed, text: i18n.ts._lookupUi.lookupFailedDescription });
 	return;
 }
