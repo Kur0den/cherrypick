@@ -34,7 +34,7 @@ export async function lookup(router?: Router) {
 			uri: query,
 		});
 
-		os.promiseDialog(promise, null, null, i18n.ts.fetchingAsApObject);
+		os.promiseDialog(promise, null, (err: Misskey.api.APIError) => {os.alert({ type: 'error', title: i18n.ts._lookupUi.lookupFailed, text: `${i18n.ts._lookupUi.lookupFailedDescription}\n${err.id}` });}, i18n.ts.fetchingAsApObject);
 
 		const res = await promise;
 
@@ -42,8 +42,6 @@ export async function lookup(router?: Router) {
 			_router.push(`/@${res.object.username}@${res.object.host}`);
 		} else if (res.type === 'Note') {
 			_router.push(`/notes/${res.object.id}`);
-		} else {
-			os.alert({ type: 'error', title: i18n.ts._lookupUi.lookupFailed, text: i18n.ts._lookupUi.lookupFailedDescription });
 		}
 
 		return;
