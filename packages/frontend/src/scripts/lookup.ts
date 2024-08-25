@@ -42,6 +42,8 @@ export async function lookup(router?: Router) {
 			_router.push(`/@${res.object.username}@${res.object.host}`);
 		} else if (res.type === 'Note') {
 			_router.push(`/notes/${res.object.id}`);
+		} else {
+			os.alert({ type: 'error', title: i18n.ts._lookupUi.lookupFailed, text: i18n.ts._lookupUi.lookupFailedDescription });
 		}
 
 		return;
