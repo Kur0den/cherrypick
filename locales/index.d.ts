@@ -11516,6 +11516,20 @@ export interface Locale extends ILocale {
          */
         "noResizeCompressLossy": string;
     };
+    "_lookupUi": {
+        /**
+         * ユーザーを照会中
+         */
+        "fetchingAsApUser": string;
+        /**
+         * 照会に失敗しました
+         */
+        "lookupFailed": string;
+        /**
+         * 照会先を正しく入力しているか確認してください
+         */
+        "lookupFailedDescription": string;
+    };
 }
 declare const locales: {
     [lang: string]: Locale;
